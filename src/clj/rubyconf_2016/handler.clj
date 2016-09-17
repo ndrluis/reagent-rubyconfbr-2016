@@ -1,9 +1,9 @@
 (ns rubyconf-2016.handler
-  (:require [compojure.core :refer [GET defroutes]]
-            [compojure.route :refer [not-found resources]]
-            [hiccup.page :refer [include-js include-css html5]]
-            [rubyconf-2016.middleware :refer [wrap-middleware]]
-            [config.core :refer [env]]))
+ (:require [compojure.core :refer [GET defroutes]]
+           [compojure.route :refer [not-found resources]]
+           [hiccup.page :refer [include-js include-css html5]]
+           [rubyconf-2016.middleware :refer [wrap-middleware]]
+           [config.core :refer [env]]))
 
 (def mount-target
   [:div#app
@@ -35,7 +35,7 @@
 
 (defroutes routes
   (GET "/" [] (loading-page))
-  (GET "/about" [] (loading-page))
+  (GET "/counter" [] (loading-page))
   (GET "/cards" [] (cards-page))
   (resources "/")
   (not-found "Not Found"))
