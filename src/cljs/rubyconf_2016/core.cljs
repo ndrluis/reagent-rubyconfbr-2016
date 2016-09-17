@@ -14,17 +14,20 @@
     [:input {:type "button" :value "-"
              :on-click #(swap! click-count dec)}]])
 
+(defn link-to [path text]
+  [:div [:a {:href path} text]])
+
 ;; -------------------------
 ;; Views
 
 (defn home-page []
   [:div [:h2 "Welcome to rubyconf-2016"]
-   [:div [:a {:href "/counter"} "go to counter page"]]])
+   [link-to "/counter" "go to the counter page"]])
 
 (defn counter-page []
   [:div [:h2 "Counter rubyconf-2016"]
-   [counter-component]
-   [:div [:a {:href "/"} "go to the home page"]]])
+   [link-to "/" "go to the home page"]
+   [counter-component]])
 
 (defn current-page []
   [:div [(session/get :current-page)]])
