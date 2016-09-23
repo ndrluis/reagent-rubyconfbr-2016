@@ -1,17 +1,27 @@
 (ns rubyconf-2016.cards
   (:require [reagent.core :as reagent :refer [atom]]
-            [reagent.session :as session]
-            [rubyconf-2016.core :as core])
-  (:require-macros
-   [devcards.core
-    :as dc
-    :refer [defcard defcard-doc defcard-rg deftest]]))
+            [cljs.test :as t :refer [report] :include-macros true]
+            [rubyconf-2016.todo :as todo]
+            [devcards.core :as dc]))
 
-(defcard-rg first-card
-  [:div>h1 "This is your first devcard!"])
+(dc/defcard-rg todo-item
+  [todo/todo-item [1 {:title "Olar"}]]
+  todo/todos
+  {:inspect-data true})
 
-(defcard-rg home-page-card
-  [core/home-page])
+(dc/defcard-rg todo-list
+  [todo/todo-list]
+  todo/todos
+  {:inspect-data true})
+
+(dc/defcard-rg todo-input
+  [todo/todo-input]
+  todo/todos
+  {:inspect-data true :history true})
+
+(dc/deftest first-testers
+  (t/testing "Teste simples"
+    (t/is (= (+ 3 2) 5) "testando adição")))
 
 (reagent/render [:div] (.getElementById js/document "app"))
 
