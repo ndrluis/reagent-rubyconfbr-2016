@@ -5,15 +5,13 @@
           [accountant.core :as accountant]
           [rubyconf-2016.todo :as todo]))
 
-(def click-count (atom 0))
-
-(defn counter-component []
+(defn counter-component [click-counter]
   [:div
-    "Counter: " @click-count
+    "Counter: " @click-counter
     [:input {:type "button" :value "+"
-             :on-click #(swap! click-count inc)}]
+             :on-click #(swap! click-counter inc)}]
     [:input {:type "button" :value "-"
-             :on-click #(swap! click-count dec)}]])
+             :on-click #(swap! click-counter dec)}]])
 
 (defn link-to [path text]
   [:div [:a {:href path} text]])
@@ -30,7 +28,7 @@
   [:div [:h2 "Counter rubyconf-2016"]
    [link-to "/" "go to the home page"]
    [link-to "/todo" "go to the todo page"]
-   [counter-component]])
+   [counter-component (atom 0)]])
 
 (defn todo-page []
   [:div [:h2 "Todo app rubyconf-2016"]

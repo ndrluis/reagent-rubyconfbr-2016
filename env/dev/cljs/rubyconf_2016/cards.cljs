@@ -1,8 +1,8 @@
 (ns rubyconf-2016.cards
-  (:require [reagent.core :as reagent :refer [atom]]
-            [cljs.test :as t :refer [report] :include-macros true]
-            [rubyconf-2016.todo :as todo]
-            [devcards.core :as dc]))
+ (:require [reagent.core :as reagent :refer [atom]]
+           [cljs.test :as t :refer [report] :include-macros true]
+           [rubyconf-2016.todo :as todo]
+           [devcards.core :as dc]))
 
 (dc/defcard-rg todo-item
   [todo/todo-item [1 {:title "Olar"}]]
@@ -21,7 +21,7 @@
 
 (dc/deftest first-testers
   (t/testing "Teste simples"
-    (t/is (= (+ 3 2) 5) "testando adição")))
+   (t/is (= (+ 3 2) 5) "testando adição")))
 
 (reagent/render [:div] (.getElementById js/document "app"))
 
