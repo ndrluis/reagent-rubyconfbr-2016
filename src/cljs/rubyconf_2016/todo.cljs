@@ -13,15 +13,17 @@
   (swap! todos dissoc id))
 
 (defn todo-input []
-  (let [value (atom "")]
-    (fn []
-      [:div
-        [:input {:type "text"
-                 :value @value
-                 :on-change #(reset! value (-> % .-target .-value))}]
-        [:input {:type "button"
-                 :value "Adicionar"
-                 :on-click #(add-todo @value)}]])))
+ (let [value (atom "")]
+   (fn []
+     [:div
+       [:input {:type "text"
+                :value @value
+                :on-change #(reset! value (-> % .-target .-value))}]
+       [:input {:type "button"
+                :value "Adicionar"
+                :on-click #((do
+                              (add-todo @value)
+                              (reset! value "")))}]])))
 
 (defn todo-item [[id {:keys [title]}]]
   [:li title
@@ -32,8 +34,8 @@
 (defn todo-list []
   [:ul
    (for [todo @todos]
-     ^{:key (first todo)}
-     [todo-item todo])])
+    ^{:key (first todo)}
+    [todo-item todo])])
 
 (defn todo-app []
   [:div
